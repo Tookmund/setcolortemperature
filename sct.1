@@ -1,0 +1,23 @@
+.\" Released into the public domain like sct itself
+.TH sct 1 "June 2016" 
+.SH NAME
+sct \- set screen color temperature
+.SH SYNOPSIS
+.B sct 
+[temperature]
+
+.SH DESCRIPTION
+.B sct
+sets the screen's color temperature in a range from 1000 to 10000
+
+.SH OPTIONS
+.IP temperature
+If passed a value in the correct range (see above)
+.B sct
+will set the current screen temperature to this value
+.IP none
+If no options are passed sct sets the color temperature to the default of 6500
+
+.SH AUTHOR
+sct was written by Ted Unangst <tedu@openbsd.org>
+This manual page was written by Jacob Adams <tookmund@gmail.com>
