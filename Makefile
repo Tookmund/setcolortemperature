@@ -13,8 +13,8 @@ install.man: sct.1
 	mkdir -p $(MAN)
 	cp sct.1 $(MAN)/sct.1
 uninstall:
-	rm $(BIN)/sct
-	rm $(MAN)/sct.1
+	rm  -f $(BIN)/sct
+	rm  -f $(MAN)/sct.1
 
 clean:
-	rm sct
+	rm -f sct
