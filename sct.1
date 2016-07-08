@@ -6,6 +6,12 @@ sct \- set screen color temperature
 .B sct 
 [temperature]
 
+or
+
+.B sct
+[-h]
+
+
 .SH DESCRIPTION
 .B sct
 sets the screen's color temperature in a range from 1000 to 10000
@@ -15,6 +21,8 @@ sets the screen's color temperature in a range from 1000 to 10000
 If passed a value in the correct range (see above)
 .B sct
 will set the current screen temperature to this value
+.IP -h
+If -h is passed sct will display usage information
 .IP none
 If no options are passed sct sets the color temperature to the default of 6500
 
