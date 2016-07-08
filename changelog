@@ -1,3 +1,8 @@
+v1.3:
+* Add -h option to print usage information
+* Prevent failing silently when temperature are out of range
+
+
 v1.2:
 * Add changelog
 * Fix compiler warnings
