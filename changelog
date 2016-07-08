@@ -1,0 +1,12 @@
+v1.2:
+* Add changelog
+* Fix compiler warnings
+
+v1.1:
+* Makefile: Add support for using flags from the enviornment
+
+v1:
+* Initial setup
+* Add Makefile
+* Add manual page
+* Add README
