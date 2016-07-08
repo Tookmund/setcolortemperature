@@ -1,6 +1,7 @@
 v1.2:
 * Add changelog
 * Fix compiler warnings
+* Sign releases
 
 v1.1:
 * Makefile: Add support for using flags from the enviornment
