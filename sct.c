@@ -8,7 +8,8 @@
 
 #include <stdlib.h>
 #include <math.h>
-
+#include <stdio.h>
+#include <string.h>
 
 /* cribbed from redshift, but truncated with 500K steps */
 static const struct { float r; float g; float b; } whitepoints[] = {
@@ -33,7 +34,15 @@ static const struct { float r; float g; float b; } whitepoints[] = {
 	{ 0.78988728,  0.86491137,  1.00000000, }, /* 10000K */
 	{ 0.77442176,  0.85453121,  1.00000000, },
 };
-
+void
+usage()
+{
+	printf("Usage: sct [temperature]\n"
+		"Temperatures must be in a range from 1000-10000\n"
+		"If no arguments are passed sct resets the display to the default temperature (6500K)\n"
+		"If -h is passed sct will display this usage information\n");
+	exit(0);
+}
 int
 main(int argc, char **argv)
 {
@@ -44,11 +53,13 @@ main(int argc, char **argv)
 	XRRScreenResources *res = XRRGetScreenResourcesCurrent(dpy, root);
 
 	int temp = 6500;
-	if (argc > 1)
+	if (argc > 1) {
+		if (!strcmp(argv[1],"-h"))
+			usage();
 		temp = atoi(argv[1]);
-	if (temp < 1000 || temp > 10000)
-		temp = 6500;
-
+		if (temp < 1000 || temp > 10000)
+			usage();
+	}
 	temp -= 1000;
 	double ratio = temp % 500 / 500.0;
 #define AVG(c) whitepoints[temp / 500].c * (1 - ratio) + whitepoints[temp / 500 + 1].c * ratio
