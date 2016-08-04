@@ -1,3 +1,4 @@
+### Status: Complete
 # sct - Set Color Temperature
 
 Based on the simple sct utility written by Ted Unangst
