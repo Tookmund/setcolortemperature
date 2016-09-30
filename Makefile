@@ -1,8 +1,10 @@
 BIN = $(DESTDIR)/usr/bin
 MAN = $(DESTDIR)/usr/share/man/man1
+CFLAGS += -Wall -std=c99
+LDFLAGS += -lX11 -lXrandr
 
 sct: sct.c
-	$(CC) sct.c $(CFLAGS) $(CPPFLAGS) -Wall -lX11 -lXrandr $(LDFLAGS) -o sct
+	$(CC) sct.c $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o sct
 
 install: sct
 	mkdir -p $(BIN)
