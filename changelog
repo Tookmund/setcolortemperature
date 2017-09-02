@@ -10,7 +10,7 @@ v1.2:
 * Sign releases
 
 v1.1:
-* Add support for using flags from the enviornment in the Makefile
+* Add support for using flags from the environment in the Makefile
 
 v1:
 * Initial setup
