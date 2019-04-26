@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: sctd.sh 20 2017-05-12 21:14:08Z umaxx $
+# Copyright (c) 2019 Jacob Adams <jacob@tookmund.com>
 # Copyright (c) 2017 Aaron Bieber <abieber@openbsd.org>
 # Copyright (c) 2017 Joerg Jung <jung@openbsd.org>
 #
@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-readonly S_V="0.4" S_YR="2017"
+readonly S_V="1.4" S_YR="2017-2019"
 
 s_err() {
     logger -i -p daemon.err -s -t "sctd" "error: ${1}"; exit 1
