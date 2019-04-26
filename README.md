@@ -1,8 +1,9 @@
-### Status: Complete
 # sct - Set Color Temperature
 
 Based on the simple sct utility written by Ted Unangst
 http://www.tedunangst.com/flak/post/sct-set-color-temperature
+
+Incorporates sctd by Aaron Bieber and Joerg Jung.
 
 ## How Does it Work?
 From the original blog post 
