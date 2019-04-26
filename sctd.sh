@@ -48,8 +48,8 @@ s_main() {
     [ $# -eq 1 ] && [ "${1}" = "version" ] &&
         { printf "sctd %s (c) %s Aaron Bieber, Joerg Jung\n" ${S_V} ${S_YR};
           exit 0; }
-    [ $# -ne 0 ] &&
-        { printf "usage: sctd\n%7ssctd version\n" " ";
+    [ $# -gt 1 ] || [ "${1}" = "-h" ] &&
+        { printf "usage: sctd\n%7ssctd 3500\n%7ssctd version\n" " " " ";
           exit 1; }
     trap "s_err \"signal received\"" 1 2 3 13 15
     [ $# -eq 1 ] && [ "${1}" != "version" ] && s_run "${1}" || s_run
