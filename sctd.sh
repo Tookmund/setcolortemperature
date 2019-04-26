@@ -29,7 +29,9 @@ s_hm() {
 }
 
 s_run() {
-    local r hm=$(s_hm) inc=2 t=4500 sct=$(which sct) || s_err "sct not found"
+    local r hm=$(s_hm) inc=2 sct=$(which sct) || s_err "sct not found"
+    [ $# -eq 0 ] && local t=4500
+    [ $# -eq 1 ] && local t="${1}"
     [ $hm -gt 720 ] && { t=$((t + inc * (1440 - hm))); } ||
                        { t=$((t + inc * hm)); }
     while :; do
@@ -50,7 +52,7 @@ s_main() {
         { printf "usage: sctd\n%7ssctd version\n" " ";
           exit 1; }
     trap "s_err \"signal received\"" 1 2 3 13 15
-    s_run
+    [ $# -eq 1 ] && [ "${1}" != "version" ] && s_run "${1}" || s_run
 }
 
 s_main "$@"
