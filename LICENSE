@@ -1,6 +1,9 @@
 blueshift is released under the 2-clause BSD license by Matthew Graybosch,
 see LICENSE.blueshift for more details.
 
+blueshiftd is also released under the 2-clause BSD license,
+but was written by Jacob Adams
+
 The rest of this project is public domain, do as you wish
 
 The whitepoints data within sct.c has been released into the public domain 
