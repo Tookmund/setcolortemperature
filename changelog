@@ -1,6 +1,4 @@
 v1.4:
-* Add sctd from Joerg Jung's port
-* Make sctd more configurable
 
 v1.3:
 * Add -h option to print usage information
