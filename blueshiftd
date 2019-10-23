@@ -36,6 +36,6 @@ blueshift $@ || exit 1
 RISE="$(attime "$SUNRISE")"
 SET="$(attime "$SUNSET")"
 
-echo "blueshift $@" | at "$RISE"
-echo "blueshift $@" | at "$SET"
+echo "sct "$3"" | at "$RISE"
+echo "sct "$4"" | at "$SET"
 echo "$0 $@" | at midnight
