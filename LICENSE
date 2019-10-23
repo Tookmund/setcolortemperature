@@ -1,4 +1,7 @@
-This project is public domain, do as you wish
+blueshift is released under the 2-clause BSD license by Matthew Graybosch,
+see LICENSE.blueshift for more details.
+
+The rest of this project is public domain, do as you wish
 
 The whitepoints data within sct.c has been released into the public domain 
 by Ingo Thies:

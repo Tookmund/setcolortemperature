@@ -1,0 +1,88 @@
+#!/usr/bin/env sh
+
+# Copyright 2019 Matthew Graybosch <mewnix@matthewgraybosch.com>
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+# list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SUNRISE="$1"
+SUNSET="$2"
+DAYTIME_COLOR_TEMP="$3"
+NIGHTTIME_COLOR_TEMP="$4"
+CURRENT=$(date "+%H%M")
+
+# check argument count and print a brief usage instruction
+# if we didn't receive 4 arguments
+if [ "${#}" -ne 4 ]; then
+    printf "usage: blueshift \$SUNRISE \$SUNSET \$DAYTIME_COLOR_TEMP \$NIGHTTIME_COLOR_TEMP\\n"
+    exit 1
+fi
+
+# hey, we better see if sct is installed...
+if ! [ -x "$(command -v sct)" ]; then
+    printf "ERROR:\\tPlease install sct using your system's package mangler.\\n\\tOn OpenBSD use \"doas pkg_add -iv sct\". Thanks!\\n"
+    exit 1
+fi
+
+# is the X server even running?
+if [ -z "${DISPLAY}" ]; then
+    printf "ERROR:\\tNo X Window session in progress.\\n"
+    exit 1
+fi    
+
+# test argument validity.
+if [ "${SUNRISE}" -lt 0 ] || [ "${SUNRISE}" -ge 2400 ]; then
+    printf "ERROR:\\tSunrise time is an invalid value.\\n\\tPlease use a value between 0000 and 2359.\\n"
+    exit 11
+fi
+
+if [ "${SUNSET}" -lt 0 ] || [ "${SUNSET}" -ge 2400 ]; then
+    printf "ERROR:\\tSunset time is an invalid value.\\n\\tPlease use a value between 0000 and 2359.\\n"
+    exit 12
+fi
+
+if [ "${DAYTIME_COLOR_TEMP}" -lt 0 ] || [ "${DAYTIME_COLOR_TEMP}" -gt 10000 ]; then
+    printf "ERROR:\\tDaytime color temperature is an invalid value.\\n\\tPlease use a value between 0 and 10,000.\\n"
+    exit 13
+fi
+
+if [ "${NIGHTTIME_COLOR_TEMP}" -lt 0 ] || [ "${NIGHTTIME_COLOR_TEMP}" -gt 10000 ]; then
+    printf "ERROR:\\tNighttime color temperature is an invalid value.\\n\\tPlease use a value between 0 and 10,000.\\n"
+    exit 14
+fi
+
+if [ "${SUNRISE}" -ge "${SUNSET}" ]; then
+    printf "ERROR:\\tSunrise time should not be greater than or equal to sunset time.\\n"
+    exit 20
+fi
+
+if [ "${NIGHTTIME_COLOR_TEMP}" -ge "${DAYTIME_COLOR_TEMP}" ]; then
+    printf "WARNING: Turning up your display's color temperature at night\\n\\t may cause eyestrain or sleep deprivation.\\n"
+fi
+
+# let's check the time and set the color temperature now.
+if [ "${CURRENT}" -ge "${SUNRISE}" ] && [ "${CURRENT}" -lt "${SUNSET}" ]; then
+    sct "${DAYTIME_COLOR_TEMP}"
+else
+    sct "${NIGHTTIME_COLOR_TEMP}"
+fi
+
+exit 0
