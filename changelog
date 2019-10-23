@@ -1,4 +1,6 @@
 v1.4:
+* Add blueshift and blueshiftd for automatically shifting the screen
+temperature
 
 v1.3:
 * Add -h option to print usage information
