@@ -83,5 +83,7 @@ main(int argc, char **argv)
 
 		XFree(crtc_gamma);
 	}
+	XFree(res);
+	XCloseDisplay(dpy);
 }
 
