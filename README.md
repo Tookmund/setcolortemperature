@@ -1,5 +1,8 @@
 # sct - Set Color Temperature
 
+**This fork is mostly unmaintained, I recommend [xsct](https://github.com/faf0/sct/)
+instead.**
+
 Based on the simple sct utility written by Ted Unangst
 http://www.tedunangst.com/flak/post/sct-set-color-temperature
 
